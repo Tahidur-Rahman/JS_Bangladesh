@@ -1,27 +1,40 @@
 import React from 'react';
-import {
-  SafeAreaView, View,Text,StyleSheet
-} from 'react-native';
+import {SafeAreaView, View, Text} from 'react-native';
 
 import Welcome from './containers/Welcome';
-import { title } from './styles/Typography';
+import 'react-native-gesture-handler';
+import {screen} from './styles/Containers';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+
+function HomeScreen() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text style={{color: 'blue'}}>Home!</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text style={{color: 'blue'}}>Settings!</Text>
+    </View>
+  );
+}
 
 const App = () => {
-
   return (
-    <View style={styles.screen}>
-    <Text style={title}>জাভাস্ক্রিপ্ট বাংলাদেশ অ্যাপে স্বাগতম</Text>
-</View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Welcome" component={Welcome} />
+        <Tab.Screen name="SettingsScreen" component={SettingsScreen} />
+        <Tab.Screen name="HomeScreen" component={HomeScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  screen:{
-      flex:1,
-      justifyContent:'center',
-      alignItems:'center',
-      backgroundColor:'#fff'
-  }
-})
 
 export default App;
