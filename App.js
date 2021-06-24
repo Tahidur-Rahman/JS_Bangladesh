@@ -1,13 +1,10 @@
 import React from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
+import {SafeAreaView, View, Text,Image} from 'react-native';
 
 import Welcome from './containers/Welcome';
 import 'react-native-gesture-handler';
-import {screen} from './styles/Containers';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-const Tab = createBottomTabNavigator();
+import Onboarding from 'react-native-onboarding-swiper';
+import { image } from './styles/Containers';
 
 function HomeScreen() {
   return (
@@ -27,13 +24,36 @@ function SettingsScreen() {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Welcome" component={Welcome} />
-        <Tab.Screen name="SettingsScreen" component={SettingsScreen} />
-        <Tab.Screen name="HomeScreen" component={HomeScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+<Onboarding
+  pages={[
+    {
+      backgroundColor: '#fff',
+      image: <Image source={require('./assets/images/hello.jpg')} style={image()}/>,
+      title: 'Hi !',
+      subtitle: 'Welcome to JS Bangladesh !',
+    },
+    {
+      backgroundColor: '#fff',
+      image: <Image source={require('./assets/images/programming.jpg')} style={image()} />,
+      title: 'Learn to Program',
+      subtitle: 'Guided documentation will help you to learn JS programming .',
+    },
+    {
+      backgroundColor: '#fff',
+      image: <Image source={require('./assets/images/share_knowledge.png')} style={image()}/>,
+      title: 'Learn to Program',
+      subtitle: 'Help others to gather knowledge !',
+    },
+    {
+      backgroundColor: '#fff',
+      image: <Image source={require('./assets/images/be_skilled.png')} style={image()}/>,
+      title: 'Be a JS Ninja',
+      subtitle: 'Best of luck',
+    },
+  
+  ]}
+/>
+   
   );
 };
 
