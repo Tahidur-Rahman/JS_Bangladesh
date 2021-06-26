@@ -3,10 +3,10 @@ import { View ,Text,StyleSheet} from 'react-native'
 import { screen } from '../styles/Containers'
 import { title } from '../styles/Typography'
 
-function Welcome() {
+function LogIn() {
     return (
         <View style={screen}>
-            <Text style={title}>জাভাস্ক্রিপ্ট বাংলাদেশ অ্যাপে স্বাগতম</Text>
+            <Text style={title}>Log In Screen</Text>
         </View>
     )
 }
@@ -15,4 +15,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Welcome
+export default LogIn
