@@ -2,8 +2,6 @@ import React, { useContext, useState} from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
-  Image,
   Platform,
   StyleSheet,
   ScrollView
@@ -14,19 +12,18 @@ import SocialButton from '../components/SocialButton';
 import { Fonts } from '../styles/Fonts';
 import { AuthContext } from '../navigation/AuthProvider';
 
-const LogIn = ({navigation}) => {
-  console.log()
+
+const SignUpScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const {register} = useContext(AuthContext)
 
-const {login} = useContext(AuthContext)
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image
-        source={{uri:'https://www.freepnglogos.com/uploads/logo-ig-png/logo-ig-instagram-social-media-icon-social-media-icon-set-logo-2.png'}}
-        style={styles.logo}
-      />
-      <Text style={styles.text}>RN Social App</Text>
+      
+      <Text style={styles.text}>Create your account</Text>
 
       <FormInput
         labelValue={email}
@@ -45,18 +42,23 @@ const {login} = useContext(AuthContext)
         iconType="lock"
         secureTextEntry={true}
       />
+      <FormInput
+        labelValue={confirmPassword}
+        onChangeText={(userPassword) => setConfirmPassword(userPassword)}
+        placeholderText="Confirm Password"
+        iconType="lock"
+        secureTextEntry={true}
+      />
 
       <FormButton
         title="Sign In"
-        onPress={() => login(email,password)}
+        onPress={() => register(email,password)}
       />
 
-      <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
-        <Text style={styles.navButtonText}>Forgot Password?</Text>
-      </TouchableOpacity>
+   
 
       {Platform.OS === 'android' ? (
-        <View>
+        <View style={{paddingTop:20}}>
           <SocialButton
             buttonTitle="Sign In with Facebook"
             btnType="facebook"
@@ -75,18 +77,12 @@ const {login} = useContext(AuthContext)
         </View>
       ) : null}
 
-      <TouchableOpacity
-        style={styles.forgotButton}
-        onPress={() => navigation.navigate('SignUpScreen')}>
-        <Text style={styles.navButtonText}>
-          Don't have an acount? Create here
-        </Text>
-      </TouchableOpacity>
+      
     </ScrollView>
   );
 };
 
-export default LogIn;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -94,7 +90,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     paddingTop: 20,
-    backgroundColor:'#fff'
+    backgroundColor:'#fff',
+    flex:1
   },
   logo: {
     height: 150,
@@ -104,14 +101,11 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: Fonts.regular,
     fontSize: 28,
-    marginBottom: 10,
     color: '#051d5f',
+    marginVertical:40
   },
   navButton: {
     marginTop: 15,
-  },
-  forgotButton: {
-    marginVertical: 25,
   },
   navButtonText: {
     fontSize: 18,
